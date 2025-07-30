@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "your_dockerhub_username/chatbot"
+        DOCKER_IMAGE = "ashu304/chatbot"
         DOCKER_TAG = "latest"
         KUBE_DEPLOYMENT_FILE = "deployment.yaml"
     }
