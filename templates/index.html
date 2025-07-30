@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mechanical ChatBot</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="chat-container">
+        <h1>Ask the Mechanical ChatBot</h1>
+        <div id="chat-box"></div>
+        <input type="text" id="user-input" placeholder="Type your question here..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById('user-input');
+            const message = input.value;
+            if (!message) return;
+
+            document.getElementById('chat-box').innerHTML += `<div class="user-msg">${message}</div>`;
+            input.value = '';
+
+            const res = await fetch('/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ question: message })
+            });
+            const data = await res.json();
+            document.getElementById('chat-box').innerHTML += `<div class="bot-msg">${data.answer}</div>`;
+        }
+    </script>
+</body>
+</html>
