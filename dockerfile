@@ -6,9 +6,6 @@ COPY . .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Initialize the SQLite DB during build
-RUN python db.py
-
 EXPOSE 5000
 
-CMD ["python", "app.py"]
+CMD ["sh", "-c", "python db.py && python app.py"]
